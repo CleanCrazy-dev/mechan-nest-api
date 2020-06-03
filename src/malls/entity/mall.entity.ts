@@ -3,7 +3,9 @@ import {
   PrimaryGeneratedColumn,
   Column,
   CreateDateColumn,
+  OneToMany,
 } from 'typeorm';
+import { ProductEntity } from 'src/products/entity/product.entity';
 
 @Entity('mall')
 export class MallEntity {
@@ -24,4 +26,6 @@ export class MallEntity {
   @Column({ type: 'varchar', nullable: true }) avartar: string;
   @CreateDateColumn() createdOn?: Date;
   @CreateDateColumn() updatedOn?: Date;
+  @OneToMany(type => ProductEntity, p => p.mall)
+  products: ProductEntity[];
 }

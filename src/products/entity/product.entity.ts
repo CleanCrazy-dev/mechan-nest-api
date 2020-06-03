@@ -3,7 +3,10 @@ import {
     PrimaryGeneratedColumn,
     Column,
     CreateDateColumn,
+    ManyToOne,
+    JoinColumn,
   } from 'typeorm';
+import { MallEntity } from 'src/malls/entity/mall.entity';
   
   @Entity('product')
   export class ProductEntity {
@@ -21,5 +24,8 @@ import {
     @Column({ type: 'varchar', nullable: true }) dimensions: string;
     @CreateDateColumn() createdOn?: Date;
     @CreateDateColumn() updatedOn?: Date;
+    @ManyToOne(type => MallEntity, m => m.products, {primary: true})
+    @JoinColumn({name: 'shoppingId'})
+    mall: MallEntity;
   }
   
