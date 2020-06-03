@@ -11,7 +11,7 @@ export class MallsService {
     private readonly mallRepo: Repository<MallEntity>, ) { }
 
     async getAllMalls(): Promise<MallDto[]> {
-        const malls = await this.mallRepo.find();
+        const malls = await this.mallRepo.find({ relations: ["products"] });
         return malls;
     }
 
